@@ -1,0 +1,15 @@
+[Unit]
+Description=Read-only OpsKit health report
+After=network.target
+
+[Service]
+Type=oneshot
+User=opskit
+WorkingDirectory=/opt/linux-ops-toolkit
+ExecStart=/usr/bin/python3 -m opskit health --path / --json --output /var/lib/opskit/health.json
+StateDirectory=opskit
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+# The process needs no root permissions. Inspect this example before installing.
